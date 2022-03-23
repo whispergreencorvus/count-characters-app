@@ -1,17 +1,17 @@
 package com.hartmanmark.charcount;
 
 import java.util.LinkedHashMap;
-
+import java.util.Map;
 
 public class CharCounter {
 
-    public LinkedHashMap<String, Integer> countChar(String input) {
+    public Map<String, Integer> countCharResult(String input) {
         return count(input);
     }
 
-    private LinkedHashMap<String, Integer> count(String enteredString) {
+    private Map<String, Integer> count(String enteredString) {
         String[] arrayOfSplittingString = enteredString.split("");
-        LinkedHashMap<String, Integer> mapStr = new LinkedHashMap<>();
+        Map<String, Integer> mapStr = new LinkedHashMap<>();
         for (int i = 0; i < arrayOfSplittingString.length; i++) {
             if (!mapStr.containsKey(arrayOfSplittingString[i])) {
                 mapStr.put(arrayOfSplittingString[i], 1);
