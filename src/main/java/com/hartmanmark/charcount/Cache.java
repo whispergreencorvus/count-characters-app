@@ -1,32 +1,31 @@
 package com.hartmanmark.charcount;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 public class Cache {
 
-    CharCounter charCounter = new CharCounter();
-    private static final int MAX_SIZE_CACHE = 2;
-    Map<String, Integer> mapStr = new LinkedHashMap<>();
-    Map<String, Integer> stringToPrint = new LinkedHashMap<>();
+    Map<String, Map<String, Integer>> cacheMap = new LinkedHashMap<>();
+    Map<String, Integer> charCounterResult = new HashMap<>();
 
-    @SuppressWarnings("serial")
-    Map<String, Map<String, Integer>> cacheCounter = new LinkedHashMap<String, Map<String, Integer>>() {
-        @Override
-        protected boolean removeEldestEntry(Map.Entry<String, Map<String, Integer>> eldest) {
-            return size() > MAX_SIZE_CACHE;
-        }
-    };
-    
-    public Map<String, Map<String, Integer>> putCharCounterResultToCache(String str) {
-        mapStr = charCounter.countCharResult(str);
-        cacheCounter.put(str, mapStr);
-        return cacheCounter;
+    public  Map<String, Integer> getCacheMap() {
+        return charCounterResult;
     }
 
-//    public boolean keyIsExist(String str) {
-//        return cacheCounter.containsKey(str);
+//    public void addIfAbsentValue(String keyChar, Integer numberOfCharacters) {
+//        charCounterResult.putIfAbsent(keyChar, numberOfCharacters);
 //    }
+    
+    public void addValueToCacheMap(String keyChar) {
+        cacheMap.putIfAbsent(keyChar, charCounterResult);
+    }
 
+//    public String getKeyFromCacheMap(String value) {
+//        return cacheMap.get(value).toString();
+//    }    
+
+//    public Boolean checkKey(String key) {
+//        return cacheMap.containsKey(key);
+//    }
 }
