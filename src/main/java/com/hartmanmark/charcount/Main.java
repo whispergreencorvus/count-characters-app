@@ -10,7 +10,6 @@ public class Main {
         String enteredString;
         System.out.println("Welcome to simple char-counter application. For output input [exit]");
         Cache cache = new Cache();
-        CharCounter charCounter = new CharCounter(cache);
         while (true) {
             System.out.print("Enter your string: ");
             enteredString = scanner.nextLine();
@@ -19,7 +18,7 @@ public class Main {
                 scanner.close();
                 break;
             }
-            charCounter.countCharResult(enteredString);
+            cache.countNumbersOfCharInString(enteredString);
         }
     }
 }
