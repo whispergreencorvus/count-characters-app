@@ -8,7 +8,7 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
         String enteredString;
-        System.out.println("Welcome to simple char-counter application. For output input [exit]");
+        System.out.println("Welcome to simple char-counter application. For output input [exit]");        
         Cache cache = new Cache();
         while (true) {
             System.out.print("Enter your string: ");
@@ -18,7 +18,7 @@ public class Main {
                 scanner.close();
                 break;
             }
-            cache.countNumbersOfCharInString(enteredString);
+            cache.cache(enteredString);
         }
     }
 }
