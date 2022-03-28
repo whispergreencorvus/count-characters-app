@@ -2,14 +2,17 @@ package com.hartmanmark.charcount;
 
 import java.util.Scanner;
 
+import com.hartmanmark.charcount.exception.InputDataIsEmptyException;
+import com.hartmanmark.charcount.exception.InputDataIsNullException;
+
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InputDataIsEmptyException, InputDataIsNullException {
 
         Scanner scanner = new Scanner(System.in);
         String enteredString;
-        System.out.println("Welcome to simple char-counter application. For output input [exit]");        
-        Cache cache = new Cache();
+        System.out.println("Welcome to simple char-counter application. For output input [exit]");
+        CharCounterService charCounterService = new CharCounterService();
         while (true) {
             System.out.print("Enter your string: ");
             enteredString = scanner.nextLine();
@@ -18,7 +21,11 @@ public class Main {
                 scanner.close();
                 break;
             }
-            cache.cache(enteredString);
+            try {
+                charCounterService.charCount(enteredString);
+            } catch (InputDataIsEmptyException | InputDataIsNullException e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 }
