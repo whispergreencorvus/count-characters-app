@@ -4,15 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.hartmanmark.charcount.exception.InputDataIsEmptyException;
-<<<<<<< HEAD
-=======
-import com.hartmanmark.charcount.exception.InputDataIsNullException;
->>>>>>> c674568511c9822678a241db75bf647e5f2ac4a5
 
 public class CharCounterService {
 
     private Printer printer = new Printer();
-<<<<<<< HEAD
     private CharCounterValidator charCounterValidator = new CharCounterValidator();
     private Cache cache;
     private String inputString;
@@ -27,19 +22,6 @@ public class CharCounterService {
     }
 
     private Map<Character, Integer> countNumbersOfCharInString(String inputString) {
-=======
-    private Cache cache = new Cache();
-    private CharCounterValidator charCounterValidator = new CharCounterValidator();
-
-    private String inputString;
-
-    public void charCount(String inputString) throws InputDataIsEmptyException, InputDataIsNullException {
-        charCounterValidator.verify(inputString);
-        checkContainsInputStringInCache(inputString);
-    }
-
-    public Map<Character, Integer> countNumbersOfCharInString(String inputString) {
->>>>>>> c674568511c9822678a241db75bf647e5f2ac4a5
         char symbol;
         Integer numberOfSymbol;
         Map<Character, Integer> countMap = new HashMap<>();
@@ -56,7 +38,6 @@ public class CharCounterService {
         return countMap;
     }
 
-<<<<<<< HEAD
     private String checkContainsInputStringInCache(String input) {
         setInputData(input);
         if (Boolean.TRUE.equals(cache.checkKey(getInputString()))) {
@@ -75,18 +56,6 @@ public class CharCounterService {
         return printer.printResult(countNumbersOfCharInString(getInputString()), getInputString());
     }
 
-=======
-    private void checkContainsInputStringInCache(String input) {
-        setInputData(input);
-        if (cache.checkKey(getInputString())) {
-            printer.printResult(cache.getValueFromCacheMap(getInputString()), getInputString());
-        } else {
-            cache.putValueToCache(getInputString(), countNumbersOfCharInString(getInputString()));
-            printer.printResult(countNumbersOfCharInString(getInputString()), getInputString());
-        }
-    }
-
->>>>>>> c674568511c9822678a241db75bf647e5f2ac4a5
     private String getInputString() {
         return inputString;
     }
