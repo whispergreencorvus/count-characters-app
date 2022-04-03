@@ -8,13 +8,13 @@ import com.hartmanmark.charcount.exception.InputDataIsEmptyException;
 
 class CharCounterServiceTest {
 
-    private Cache cache;
+    private CharCounter charCounter;
     private CharCounterService charCounterService;
 
     @BeforeEach
     void init() {
-        cache = new Cache();
-        charCounterService = new CharCounterService(cache);
+        charCounter = new CharCounter();
+        charCounterService = new CharCounterService(charCounter);
     }
 
     @Test

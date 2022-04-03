@@ -1,15 +1,13 @@
 package com.hartmanmark.charcount;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.hartmanmark.charcount.exception.InputDataIsEmptyException;
 
 public class CharCounterService {
 
+    private Cache cache = new Cache();
     private Printer printer = new Printer();
     private CharCounterValidator charCounterValidator = new CharCounterValidator();
-    private Cache cache;
+    private CharCounter charCounter;
     private String inputString;
 
     public String charCount(String inputString) throws InputDataIsEmptyException {
@@ -17,43 +15,26 @@ public class CharCounterService {
         return checkContainsInputStringInCache(inputString);
     }
 
-    public CharCounterService(Cache cache) {
-        this.cache = cache;
-    }
-
-    private Map<Character, Integer> countNumbersOfCharInString(String inputString) {
-        char symbol;
-        Integer numberOfSymbol;
-        Map<Character, Integer> countMap = new HashMap<>();
-        char[] inputStringAsCharArray = inputString.toCharArray();
-        for (int j = 0; j < inputStringAsCharArray.length; j++) {
-            symbol = inputStringAsCharArray[j];
-            numberOfSymbol = countMap.get(symbol);
-            if (numberOfSymbol != null) {
-                countMap.put(symbol, numberOfSymbol + 1);
-            } else {
-                countMap.put(symbol, 1);
-            }
-        }
-        return countMap;
+    public CharCounterService(CharCounter charCounter) {
+        this.charCounter = charCounter;
     }
 
     private String checkContainsInputStringInCache(String input) {
         setInputData(input);
         if (Boolean.TRUE.equals(cache.checkKey(getInputString()))) {
-            return getValueFromCacheIfKeyIsExist();
+            return getValueFromCache();
         } else {
-            cache.putValueToCache(getInputString(), countNumbersOfCharInString(getInputString()));
-            return printValue();
+            putValueToCache();
+            return getValueFromCache();
         }
     }
 
-    private String getValueFromCacheIfKeyIsExist() {
+    private String getValueFromCache() {
         return printer.printResult(cache.getValueFromCacheMap(getInputString()), getInputString());
     }
 
-    private String printValue() {
-        return printer.printResult(countNumbersOfCharInString(getInputString()), getInputString());
+    private void putValueToCache() {
+        cache.putValueToCache(getInputString(), charCounter.countNumbersOfCharInString(getInputString()));
     }
 
     private String getInputString() {

@@ -10,8 +10,8 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         String enteredString;
         System.out.println("Welcome to simple char-counter application. For output input [exit]");
-        Cache cache = new Cache();
-        CharCounterService charCounterService = new CharCounterService(cache);
+        CharCounter charCounter = new CharCounter();
+        CharCounterService charCounterService = new CharCounterService(charCounter);
         while (true) {
             System.out.print("Enter your string: ");
             enteredString = scanner.nextLine();
