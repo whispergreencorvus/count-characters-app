@@ -8,12 +8,13 @@ import org.junit.jupiter.api.Test;
 import com.hartmanmark.charcount.exception.InputDataIsEmptyException;
 
 class PrinterTest {
+    
+    private Printer printer = new Printer();
 
     @Test
     void printResult_shouldPrintResultAsString_whenInputHashMapContains_Abbccc ()
             throws InputDataIsEmptyException {
         String string = "Abbccc ";
-        Printer printer = new Printer();
         Map<Character, Integer> input = new HashMap<>();
         input.put('A', 1);
         input.put('b', 1);
@@ -34,7 +35,6 @@ class PrinterTest {
     void printResult_shouldPrintResultAsString_whenInputHashMapContains_0123456()
             throws InputDataIsEmptyException {
         String string = "0123456";
-        Printer printer = new Printer();
         Map<Character, Integer> input = new HashMap<>();
         input.put('0', 1);
         input.put('1', 1);
@@ -58,7 +58,6 @@ class PrinterTest {
     void printResult_shouldPrintResultAsString_whenInputHashMapContains_Symbols()
             throws InputDataIsEmptyException {
         String string = "!@#$%^&";
-        Printer printer = new Printer();
         Map<Character, Integer> input = new HashMap<>();
         input.put('!', 1);
         input.put('@', 1);

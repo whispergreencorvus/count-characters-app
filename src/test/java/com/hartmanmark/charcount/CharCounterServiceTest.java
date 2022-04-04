@@ -2,20 +2,13 @@ package com.hartmanmark.charcount;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import com.hartmanmark.charcount.exception.InputDataIsEmptyException;
 
 class CharCounterServiceTest {
 
-    private CharCounter charCounter;
-    private CharCounterService charCounterService;
-
-    @BeforeEach
-    void init() {
-        charCounter = new CharCounter();
-        charCounterService = new CharCounterService(charCounter);
-    }
+    private CharCounter charCounter = new CharCounter();
+    private CharCounterService charCounterService = new CharCounterService(charCounter);
 
     @Test
     void testCharCount_shouldCountCharactersInInputString_whenInputStringContains_HelloWorld() throws InputDataIsEmptyException {

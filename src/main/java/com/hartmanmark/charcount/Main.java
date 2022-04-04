@@ -6,7 +6,6 @@ import com.hartmanmark.charcount.exception.InputDataIsEmptyException;
 public class Main {
 
     public static void main(String[] args) throws InputDataIsEmptyException {
-
         Scanner scanner = new Scanner(System.in);
         String enteredString;
         System.out.println("Welcome to simple char-counter application. For output input [exit]");
