@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import com.hartmanmark.charcount.exception.InputDataIsEmptyException;
 
 class PrinterTest {
-    
+
     private Printer printer = new Printer();
 
     @Test

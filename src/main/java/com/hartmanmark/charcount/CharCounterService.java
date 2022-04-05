@@ -4,7 +4,7 @@ import com.hartmanmark.charcount.exception.InputDataIsEmptyException;
 
 public class CharCounterService {
 
-    private Cache cache = new Cache();
+    private Cache cache;
     private Printer printer = new Printer();
     private CharCounterValidator charCounterValidator = new CharCounterValidator();
     private CharCounter charCounter;
@@ -15,8 +15,9 @@ public class CharCounterService {
         return checkContainsInputStringInCache(inputString);
     }
 
-    public CharCounterService(CharCounter charCounter) {
+    public CharCounterService(CharCounter charCounter, Cache cache) {
         this.charCounter = charCounter;
+        this.cache = cache;
     }
 
     private String checkContainsInputStringInCache(String input) {

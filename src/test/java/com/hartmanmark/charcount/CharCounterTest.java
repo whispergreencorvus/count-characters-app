@@ -1,36 +1,89 @@
 package com.hartmanmark.charcount;
 
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.mockito.exceptions.base.MockitoException;
-import org.mockito.junit.MockitoJUnitRunner;
-
-@ExtendWith(MockitoException.class)
+import org.mockito.junit.jupiter.MockitoExtension;
 
 class CharCounterTest {
-    
-    @Mock CharCounter charCounter;
-    
+
+    @ExtendWith(MockitoExtension.class)
+
+    @Mock
+    CharCounter charCounter;
+
+    @Mock
+    Cache cache;
+
     @InjectMocks
     CharCounterService charCounterService;
-        
+
     @Test
-    void countNumbersOfCharInString_shouldCalledOnlyOneTime_whenInputDataContainsTheSameString() throws Exception {
-        String firstInput = "hello world!";
-        String secondInput = "hello world!";
-//        CharCounter charCounter = mock(CharCounter.class);
-//        CharCounterService charCounterService = new CharCounterService(charCounter);
-        charCounterService.charCount(firstInput);
-        charCounterService.charCount(secondInput);
-        verify(charCounter, times(1)).countNumbersOfCharInString(secondInput);
+    void countNumbersOfCharInString_shouldNotInvoke_whenTheCacheAlreadyHasACalculatedValue_Words() throws Exception {
+        String input = "A book is a medium for recording information in the form of writing or images";
+        when(cache.checkKey(input)).thenReturn(true);
+        charCounterService.charCount(input);
+        verify(charCounter, times(0)).countNumbersOfCharInString(input);
+    }
+
+    @Test
+    void countNumbersOfCharInString_shouldInvoke_whenTheCacheDoesNotHaveACalculatedValueYet_Words() throws Exception {
+        String input = "A book is a medium for recording information in the form of writing or images";
+        when(cache.checkKey(input)).thenReturn(false);
+        charCounterService.charCount(input);
+        verify(charCounter, times(1)).countNumbersOfCharInString(input);
+    }
+
+    @Test
+    void countNumbersOfCharInString_shouldNotInvoke_whenTheCacheAlreadyHasACalculatedValue_Numbers() throws Exception {
+        String input = "1234567890";
+        when(cache.checkKey(input)).thenReturn(true);
+        charCounterService.charCount(input);
+        verify(charCounter, times(0)).countNumbersOfCharInString(input);
+    }
+
+    @Test
+    void countNumbersOfCharInString_shouldInvoke_whenTheCacheDoesNotHaveACalculatedValueYet_Numbers() throws Exception {
+        String input = "1234567890";
+        when(cache.checkKey(input)).thenReturn(false);
+        charCounterService.charCount(input);
+        verify(charCounter, times(1)).countNumbersOfCharInString(input);
+    }
+
+    @Test
+    void countNumbersOfCharInString_shouldNotInvoke_whenTheCacheAlreadyHasACalculatedValue_Symbols() throws Exception {
+        String input = "!@#$%^&*()";
+        when(cache.checkKey(input)).thenReturn(true);
+        charCounterService.charCount(input);
+        verify(charCounter, times(0)).countNumbersOfCharInString(input);
+    }
+
+    @Test
+    void countNumbersOfCharInString_shouldInvoke_whenTheCacheDoesNotHaveACalculatedValueYet_Symbols() throws Exception {
+        String input = "!@#$%^&*()";
+        when(cache.checkKey(input)).thenReturn(false);
+        charCounterService.charCount(input);
+        verify(charCounter, times(1)).countNumbersOfCharInString(input);
+    }
+
+    @Test
+    void countNumbersOfCharInString_shouldNotInvoke_whenTheCacheAlreadyHasACalculatedValue_Spasec() throws Exception {
+        String input = "            ";
+        when(cache.checkKey(input)).thenReturn(true);
+        charCounterService.charCount(input);
+        verify(charCounter, times(0)).countNumbersOfCharInString(input);
+    }
+
+    @Test
+    void countNumbersOfCharInString_shouldInvoke_whenTheCacheDoesNotHaveACalculatedValueYet_Spaces() throws Exception {
+        String input = "            ";
+        when(cache.checkKey(input)).thenReturn(false);
+        charCounterService.charCount(input);
+        verify(charCounter, times(1)).countNumbersOfCharInString(input);
     }
 }
