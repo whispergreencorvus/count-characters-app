@@ -8,8 +8,7 @@ Since the counting operation can be time-consuming, the method should cache the 
 
 Example of result:
 
-```bash 
-
+```
 A book is a medium for recording information in the form of writing or images
 " " - 14
 "A" - 1
